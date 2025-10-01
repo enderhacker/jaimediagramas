@@ -199,9 +199,29 @@ function drawEntity(entity) {
 		const pos = this.position();
 		const newX = Math.max(0, Math.min(CANVAS_WIDTH - 150, pos.x));
 		const newY = Math.max(0, Math.min(CANVAS_HEIGHT - 80, pos.y));
+
+		const deltaX = newX - entity.x;
+		const deltaY = newY - entity.y;
+
 		this.position({ x: newX, y: newY });
 		entity.x = newX;
 		entity.y = newY;
+
+		// Move all properties of this entity
+		properties.forEach((propData) => {
+			if (propData.entity.id === entity.id) {
+				const propGroup = propData.group;
+				const propPos = propGroup.position();
+				propGroup.position({
+					x: propPos.x + deltaX,
+					y: propPos.y + deltaY,
+				});
+				// Store the new position
+				propData.x = propPos.x + deltaX;
+				propData.y = propPos.y + deltaY;
+			}
+		});
+
 		updateConnections();
 	});
 
