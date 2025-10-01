@@ -1060,7 +1060,7 @@
 				const MAX_WIDTH = 220;
 				const MAX_HEIGHT = 60;
 				const PADDING_X = 20;
-				const PADDING_Y = 10;
+				const PADDING_Y = 20;
 
 				// Temporary text to measure size
 				const tempText = new Konva.Text({
@@ -1102,15 +1102,15 @@
 
 				// Responsive text inside diamond
 				const text = new Konva.Text({
-					text: relationship.name,
-					fontSize: 14,
-					fontFamily: "Inter, sans-serif",
-					fontStyle: "bold",
-					width: diamondWidth * 2 - 10,
-					align: "center",
-					wrap: "char",
-					ellipsis: true,
-				});
+                    text: relationship.name,
+                    fontSize: 14,
+                    fontFamily: "Inter, sans-serif",
+                    fontStyle: "bold",
+                    width: diamondWidth - PADDING_X/2,
+                    align: "center",
+                    wrap: "word",
+                    ellipsis: true,
+                });
 
 				// Center text
 				// Must measure text after wrapping
@@ -1132,7 +1132,6 @@
 				createRelationshipLines(relationship);
 			}
 
-			// Create relationship connection lines
 			function createRelationshipLines(relationship) {
 				// Line to fromEntity
 				const line1 = new Konva.Line({
@@ -1252,11 +1251,10 @@
 				// Function to position cardinality groups along the line
 				function positionCardinality(cardGroup, entityPos, entityWidth, entityHeight, side, isSelfRelation) {
 					let dx, dy;
+					dx = side === "left" ? -diamondWidth / 2 - 40 : diamondWidth / 2 + 40;
 					if (isSelfRelation) {
-						dx = side === "left" ? -diamondWidth / 2 : diamondWidth / 2;
 						dy = 0;
 					} else {
-						dx = relPos.x - (entityPos.x + entityWidth / 2);
 						dy = relPos.y - (entityPos.y + entityHeight / 2);
 					}
 
@@ -1379,33 +1377,34 @@
 				});
 
 				if (formValues) {
-					Object.assign(relationship, {
-						name: formValues.name,
-						fromEntity: entities.find((e) => e.id === formValues.fromId),
-						toEntity: entities.find((e) => e.id === formValues.toId),
-						cardinality: formValues.cardinality,
-					});
+  Object.assign(relationship, {
+    name: formValues.name,
+    fromEntity: entities.find((e) => e.id === formValues.fromId),
+    toEntity: entities.find((e) => e.id === formValues.toId),
+    cardinality: formValues.cardinality,
+  });
 
-					// Find old group
-					const oldGroup = layer.findOne(`#relationship-${relationship.id}`);
-					if (oldGroup) {
-						// Destroy all associated lines and texts first
-						relationship.lines.forEach((line) => line.destroy());
-						relationship.cardinalityTexts.forEach((text) => text.destroy());
+  const oldGroup = layer.findOne(`#relationship-${relationship.id}`);
+  if (oldGroup) {
+    relationship.lines.forEach((line) => line.destroy());
+    relationship.cardinalityTexts.forEach((text) => text.destroy());
 
-						// Destroy the group itself
-						oldGroup.destroy();
-					}
+    relationship.lines = [];
+    relationship.cardinalityTexts = [];
 
-					// Remove from relationships array
-					relationships = relationships.filter((r) => r.id !== relationship.id);
+    oldGroup.destroy();
+  }
 
-					// Redraw relationship (preserve previous x/y)
-					drawRelationship(relationship);
+  // ❌ don’t remove from array
+  // relationships = relationships.filter((r) => r.id !== relationship.id);
 
-					// Update layer
-					layer.batchDraw();
-				}
+  // just redraw using the same object
+  drawRelationship(relationship);
+
+  layer.batchDraw();
+}
+
+
 			}
 
 			// Delete relationship
@@ -1765,3 +1764,4 @@
 		</script>
 	</body>
 </html>
+
