@@ -1251,10 +1251,11 @@
 				// Function to position cardinality groups along the line
 				function positionCardinality(cardGroup, entityPos, entityWidth, entityHeight, side, isSelfRelation) {
 					let dx, dy;
-					dx = side === "left" ? -diamondWidth / 2 - 40 : diamondWidth / 2 + 40;
 					if (isSelfRelation) {
 						dy = 0;
+						dx = side === "left" ? -diamondWidth / 2 - 40 : diamondWidth / 2 + 40;
 					} else {
+						dx = relPos.x - (entityPos.x + entityWidth / 2) + (side === "left" ? -40 : 40);
 						dy = relPos.y - (entityPos.y + entityHeight / 2);
 					}
 
