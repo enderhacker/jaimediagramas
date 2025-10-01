@@ -1,0 +1,163 @@
+body {
+	margin: 0;
+	overflow: hidden;
+	font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.toolbar {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	z-index: 1000;
+}
+
+.btn {
+	transition: all 0.2s ease;
+	font-weight: 500;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+	transform: translateY(0);
+}
+
+#container {
+	width: 100vw;
+	height: calc(100vh - 72px);
+	background-color: #f8fafc;
+}
+
+/* Context Menu Styles */
+.context-menu {
+	position: absolute;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	padding: 8px 0;
+	min-width: 180px;
+	z-index: 10000;
+}
+
+.context-menu-item {
+	padding: 10px 16px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	transition: background 0.15s;
+	font-size: 14px;
+	color: #1f2937;
+}
+
+.context-menu-item:hover {
+	background: #f3f4f6;
+}
+
+.context-menu-item i {
+	width: 16px;
+	text-align: center;
+}
+
+.context-menu-divider {
+	height: 1px;
+	background: #e5e7eb;
+	margin: 4px 0;
+}
+
+/* SweetAlert2 Custom Styles */
+.swal2-popup {
+	font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.swal2-title {
+	color: #1f2937;
+	font-weight: 600;
+}
+
+.swal2-html-container {
+	color: #4b5563;
+}
+
+.swal2-input {
+	border: var(--swal2-input-border);
+	border-radius: var(--swal2-input-border-radius);
+}
+
+/* Error Modal Styles */
+.error-item {
+	padding: 12px;
+	border-radius: 6px;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: start;
+	gap: 10px;
+}
+
+.error-item.error {
+	background: #fee2e2;
+	border-left: 4px solid #ef4444;
+}
+
+.error-item.warning {
+	background: #fef3c7;
+	border-left: 4px solid #f59e0b;
+}
+
+.error-item-icon {
+	font-size: 18px;
+	margin-top: 2px;
+}
+
+.error-item.error .error-item-icon {
+	color: #dc2626;
+}
+
+.error-item.warning .error-item-icon {
+	color: #d97706;
+}
+
+.error-item-content {
+	flex: 1;
+}
+
+.error-item-title {
+	font-weight: 600;
+	margin-bottom: 4px;
+	font-size: 14px;
+}
+
+.error-item-message {
+	font-size: 13px;
+	color: #4b5563;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+	position: absolute;
+	background: white;
+	border-radius: 6px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	padding: 4px 0;
+	min-width: 150px;
+	z-index: 1000;
+}
+
+.dropdown-item {
+	padding: 8px 12px;
+	cursor: pointer;
+	font-size: 13px;
+	color: #374151;
+	transition: background 0.15s;
+}
+
+.dropdown-item:hover {
+	background: #f3f4f6;
+}
+
+.dropdown-item i {
+	margin-right: 8px;
+	width: 14px;
+}
